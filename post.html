@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <title>Tech | Home</title>
+    <title>Tech | Post</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="shortcut icon" type="image/png" href="/assets/image_landing/logo_icon.svg">
 </head>
@@ -14,10 +14,10 @@
         <header class="header">
             <div class="header__container">
                 <div class="header__inner">
-                    <a href="#" class="logo"><img src="/assets/image_landing/logo_tech.svg" alt="TECH logo" class="logo__img"></a>
+                    <a href="#" class="logo"><img src="/assets/image_landing/logo_tech.svg" id="lo" alt="TECH logo" class="logo__img"></a>
                     <nav class="menu">
                         <ul class="menu__list">
-                            <li class="menu__list-item"><a href="/index.html" class="menu__list-link active">Home</a></li>
+                            <li class="menu__list-item"><a href="/index.html" class="menu__list-link" id="ex">Home</a></li>
                             <li class="menu__list-item"><a href="/blog.html" class="menu__list-link">Blog</a></li>
                             <li class="menu__list-item"><a href="/about.html" class="menu__list-link">About</a></li>
                             <li class="menu__list-item"><a href="/contact.html" class="menu__list-link">Contact</a></li>
@@ -27,20 +27,29 @@
             </div>
         </header>
         <main class="main">
-            <section class="top">
-                <div class="top__container">
-                    <h1 class="title">Life hack automotive</h1>
-                    <a href="/blog.html" class="top__link">Find a post</a>
-                </div>
-            </section>
-            <section class="latest-posts">
-                <div class="latest-posts__container">
-                    <div class="latest-post__title">
-                        <h2>Latest Posts</h2>
-                        <p>Depending on your circumstances and what's important to you, tricks this could be a great option for your car. Below are some important factors that may influence your decision.</p>
+            <section class="content margin100">
+                <div class="content__container">
+                    <div class="content__subject">
+                        <h1>Post</h1>
                     </div>
+            </section>
+            <section class="post">
+                <div class="post__container">
+                  <div class="post__inner margin100">
+                  </div>
+                  <div class="post-back__inner margin100">
+                    <button class="post__back" id="backToBlog">Back to blog</button>
+                  </div>
                 </div>
             </section>
+            <div class="popup" id="popup">
+                <a href="#lo" class="popup__area"><i>4</i></a>
+                <div class="popup__body">
+                    <div class="popup__content width__image">
+                        <a href="#ex" class="popup__close"><h3>X</h3></a>
+                        <div class="popup__image"><img src="#" alt="#"></div>
+                    </div>
+            </div>
         </main>
         <footer class="footer">
             <div class="footer__container">
@@ -64,5 +73,6 @@
             <div class="footer__copyright">&copy; 2022. TECH All Rights Reserved.</div>
         </footer>
     </div>
+    <script src="/js/post.js"></script>
 </body>
 </html>

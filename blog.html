@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <title>Tech | Home</title>
+    <title>Tech | Blog</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="shortcut icon" type="image/png" href="/assets/image_landing/logo_icon.svg">
 </head>
@@ -17,8 +17,8 @@
                     <a href="#" class="logo"><img src="/assets/image_landing/logo_tech.svg" alt="TECH logo" class="logo__img"></a>
                     <nav class="menu">
                         <ul class="menu__list">
-                            <li class="menu__list-item"><a href="/index.html" class="menu__list-link active">Home</a></li>
-                            <li class="menu__list-item"><a href="/blog.html" class="menu__list-link">Blog</a></li>
+                            <li class="menu__list-item"><a href="/index.html" class="menu__list-link">Home</a></li>
+                            <li class="menu__list-item"><a href="/blog.html" class="menu__list-link active">Blog</a></li>
                             <li class="menu__list-item"><a href="/about.html" class="menu__list-link">About</a></li>
                             <li class="menu__list-item"><a href="/contact.html" class="menu__list-link">Contact</a></li>
                         </ul>
@@ -27,17 +27,34 @@
             </div>
         </header>
         <main class="main">
-            <section class="top">
-                <div class="top__container">
-                    <h1 class="title">Life hack automotive</h1>
-                    <a href="/blog.html" class="top__link">Find a post</a>
+            <section class="content margin100">
+                <div class="content__container">
+                    <div class="content__subject">
+                        <h1>Blog</h1>
+                    </div>
+            </section>
+            <section class="caption">
+                <div class="caption__container">
+                    <div class="caption__inner">
+                        <div class="caption__title">
+                            <h2>List of posts</h2>
+                        </div>
+                    </div>
+                    <div class="caption__tabs margin100">
+                        <button class="tabs__btn category" id="maintenance" name="Maintenance" data-category-id="3">Maintenance</button>
+                        <button class="tabs__btn category" id="care" name="Care" data-category-id="4">Care</button>
+                        <button class="tabs__btn category" id="advice" name="Advice" data-category-id="5">Advice</button>
+                        <button class="tabs__btn category" id="reminder" name="Reminder" data-category-id="6">Reminder</button>
+                      </div>
+                      
                 </div>
             </section>
-            <section class="latest-posts">
-                <div class="latest-posts__container">
-                    <div class="latest-post__title">
-                        <h2>Latest Posts</h2>
-                        <p>Depending on your circumstances and what's important to you, tricks this could be a great option for your car. Below are some important factors that may influence your decision.</p>
+            <section class="posts margin100">
+                <div class="posts__container">
+                    <div class="posts__inner margin100">
+                    </div>
+                    <div class="posts-allposts__inner">
+                        <button class="posts__allposts">View more</button>
                     </div>
                 </div>
             </section>
@@ -48,7 +65,7 @@
                     <a href="#" class="logo"><img src="/assets/image_landing/logo_footer.svg" alt="TECH logo" class="logo__img"></a>
                     <nav class="footer__menu">
                         <ul class="footer__menu__list">
-                            <li class="footer__menu__list-item"><a href="#" class="footer__menu__list-link">Blog</a></li>
+                            <li class="footer__menu__list-item"><a href="#" class="footer__menu__list-link active">Blog</a></li>
                             <li class="footer__menu__list-item"><a href="#" class="footer__menu__list-link">About</a></li>
                             <li class="footer__menu__list-item"><a href="#" class="footer__menu__list-link">Contact</a></li>
                         </ul>
@@ -64,5 +81,6 @@
             <div class="footer__copyright">&copy; 2022. TECH All Rights Reserved.</div>
         </footer>
     </div>
+    <script src="/js/blog.js"></script>
 </body>
 </html>
