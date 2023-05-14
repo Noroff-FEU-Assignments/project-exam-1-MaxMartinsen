@@ -3,11 +3,21 @@
   --white: #ffffff;
   --grey:#EBEBEB;
   --lightgrey:#c7c7c7;
-  --red:#db1313dd;
+  --red:#DB1313;
 }
 
 
 /*- fonts -*/
+body {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: var(--black);
+  background-color: var(--white);
+}
+
 h1 {
   font-weight: 700;
   font-size: 48px;
@@ -16,8 +26,8 @@ h1 {
 
 h2 {
   font-weight: 700;
-  font-size: 48px;
-  line-height: 57px;
+  font-size: calc(min(6vw, 48px));
+  line-height: calc(min(6.5vw, 57px));
 }
 
 h3,
@@ -44,14 +54,14 @@ nav {
 
 .top__link {
   font-weight: 700;
-font-size: 36px;
-line-height: 43px;
+  font-size: calc(min(2.250vw, 36px));
+  line-height: calc(min(2.6vw, 41px));
 }
 
 /*- bootstrap -*/
 
-.menu__list-link:hover,
-.menu__list-link.active {
+.menu__link:hover,
+.menu__link.active {
   background-color: var(--lightgrey);
 }
 
@@ -68,8 +78,8 @@ line-height: 43px;
   display: none;
 }
 
-.margin100 {
-  margin-bottom: 100px;
+.margin70 {
+  margin-bottom: 70px;
 }
 
 h1,

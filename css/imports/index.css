@@ -1,32 +1,39 @@
 /*- section__top -*/
 
 .top {
+  position: relative;
     color: var(--white);
     text-align: center;
-    padding-top: 40px;
-    background-image: url(/assets/image_landing/image__landing.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    padding-top: 48px;
+    background-color: var(--black);
+  }
+
+  .top img {
     max-width: 100%;
   }
   .top__container {
   }
+  .top__inner {
+    position: absolute;
+    padding-top: calc(min(9vw, 170px));
+    z-index: 5;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
   .title {
     font-weight: 400;
-    font-size: 96px;
-    line-height: 114px;
-    padding-bottom: 40px;
+    font-size: calc(min(6vw, 96px));;
+    line-height: calc(min(7vw, 108px));
   }
   .top__link {
     background-color: var(--black);
-    padding: 23px;
-    max-width: 430px;
+    padding: calc(min(1.6vw, 25px));
+    max-width: calc(min(26vw, 430px));
     width: 100%;
     display: inline-block;
     text-transform: uppercase;
     border: 1px solid var(--white);
-    margin-bottom: 450px;
   }
   
   /*- section__latest-posts -*/

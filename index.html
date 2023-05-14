@@ -11,26 +11,33 @@
 </head>
 <body>
     <div class="wrapper">
-        <header class="header">
-            <div class="header__container">
+        <header class="header" id="open">
+            <div class="header__container" id="close">
                 <div class="header__inner">
-                    <a href="#" class="logo"><img src="/assets/image_landing/logo_tech.svg" alt="TECH logo" class="logo__img"></a>
-                    <nav class="menu">
-                        <ul class="menu__list">
-                            <li class="menu__list-item"><a href="/index.html" class="menu__list-link active">Home</a></li>
-                            <li class="menu__list-item"><a href="/blog.html" class="menu__list-link">Blog</a></li>
-                            <li class="menu__list-item"><a href="/about.html" class="menu__list-link">About</a></li>
-                            <li class="menu__list-item"><a href="/contact.html" class="menu__list-link">Contact</a></li>
-                        </ul>
-                    </nav>
+                    <a href="/index.html#index" class="header__logo"><img src="/assets/image_landing/logo_tech.svg" alt="TECH logo" class="logo__img"></a>
+                    <div class="header__menu menu" id="index">
+                        <nav class="menu__body" id="menu">
+                            <ul class="menu__list">
+                                <li class="menu__item"><a href="/index.html" class="menu__link active">Home</a></li>
+                                <li class="menu__item"><a href="/blog.html" class="menu__link">Blog</a></li>
+                                <li class="menu__item"><a href="/about.html" class="menu__link">About</a></li>
+                                <li class="menu__item"><a href="/contact.html" class="menu__link">Contact</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <a href="#open" class="icon-menu"><span></span><i>1</i></a>
+                    <a href="#close" class="close-icon-menu"><i>0</i></a>
                 </div>
             </div>
         </header>
         <main class="main">
-            <section class="top margin100">
+            <section class="top margin70">
+                <img src="/assets/image_landing/image__landing.jpg" alt="">
                 <div class="top__container">
-                    <h1 class="title">Life hack automotive</h1>
-                    <a href="/blog.html" class="top__link">Find a post</a>
+                    <div class="top__inner">
+                        <h1 class="title">Life hack automotive</h1>
+                        <a href="/blog.html" class="top__link">Find a post</a>
+                    </div>
                 </div>
             </section>
             <section class="latest-posts">
@@ -41,7 +48,7 @@
                     </div>
                 </div>
             </section>
-            <section class="slider margin100">
+            <section class="slider margin70">
                 <div class="slider__container">
                     <div  class="slider__inner" id="slider">
                         <button id="leftBtn" class="slider__left-btn">&larr;</button>
@@ -54,7 +61,7 @@
         <footer class="footer">
             <div class="footer__container">
                 <div class="footer__inner">
-                    <a href="#" class="logo"><img src="/assets/image_landing/logo_footer.svg" alt="TECH logo" class="logo__img"></a>
+                    <a href="#" class="header__logo"><img src="/assets/image_landing/logo_footer.svg" alt="TECH logo" class="logo__img"></a>
                     <nav class="footer__menu">
                         <ul class="footer__menu__list">
                             <li class="footer__menu__list-item"><a href="#" class="footer__menu__list-link">Blog</a></li>
