@@ -164,7 +164,7 @@
   font-size: calc(min(5vw, 36px));
 }
 .slider__inner button {
-  padding: 2px 44px 6px 44px;
+  padding: 2px 44px 4px 44px;
   margin: 25px 15px 0px 15px;
 }
 .slider__inner {
