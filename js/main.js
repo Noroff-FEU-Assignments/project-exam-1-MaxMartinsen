@@ -128,16 +128,49 @@ function handlePostItemClick(event) {
     window.location.href = `post.html?id=${postId}`;
 }
 function updatePostsPerPage() {
+    const slider = document.getElementById('slider');
+    const content = document.querySelector('.slider__content');
+    const leftBtn = document.getElementById('leftBtn');
+    const rightBtn = document.getElementById('rightBtn');
+
+    // If the width is 767.98px or less
     if (window.matchMedia("(max-width: 767.98px)").matches) {
-      postsPerPage = 2;
+        postsPerPage = 2;
+
+        // Check if buttons already moved to new container
+        if (!document.querySelector('.slider__buttons')) {
+            // Create new div for the buttons
+            const buttonsContainer = document.createElement('div');
+            buttonsContainer.className = 'slider__buttons';
+
+            // Append the buttons to the new div
+            buttonsContainer.appendChild(leftBtn);
+            buttonsContainer.appendChild(rightBtn);
+
+            // Append the new div to the slider
+            slider.appendChild(buttonsContainer);
+        }
     } else {
-      postsPerPage = 4;
+        postsPerPage = 4;
+
+        // If width is more than 767.98px and buttons are in separate container, move them back
+        if (document.querySelector('.slider__buttons')) {
+            const buttonsContainer = document.querySelector('.slider__buttons');
+
+            // Move the buttons back to the slider
+            slider.insertBefore(leftBtn, content);
+            slider.insertBefore(rightBtn, content.nextSibling);
+
+            // Remove the buttons container
+            buttonsContainer.remove();
+        }
     }
     currentPostIndex = 0;
     showPosts(posts.slice(currentPostIndex, currentPostIndex + postsPerPage));
     updateButtonsVisibility(posts, currentPostIndex);
 }
-  
-  window.addEventListener('resize', updatePostsPerPage);
-  
-  updatePostsPerPage();
+
+window.addEventListener('resize', updatePostsPerPage);
+
+updatePostsPerPage();
+
