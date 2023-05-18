@@ -1,84 +1,86 @@
 let postsPerPage;
-if (window.matchMedia("(max-width: 767.98px)").matches) {
-  postsPerPage = 2;
-} else {
-  postsPerPage = 4;
-}
-
 let currentPostIndex = 0;
 let posts = [];
+const leftBtn = document.getElementById("leftBtn");
+const rightBtn = document.getElementById("rightBtn");
 
 // Base URL
 const apiBase = "http://carblog.maxmartinsen.pw";
 const jsonBase = "/wp-json/wp/v2";
 const postsBase = "/posts";
 const perPageAll = "?per_page=99&_embed";
-const perPageTen = "?per_page=10&_embed";
 
 // Full URL
 const fullPostURL = apiBase + jsonBase + postsBase + perPageAll;
-const tenPostURL = apiBase + jsonBase + postsBase + perPageTen;
 
 // Fetching the posts
 async function getPosts(url) {
-    const response = await fetch(url);
-    const data = await response.json();
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(response.statusText);
+        const data = await response.json();
 
-    return data.map(post => {
-        const imgRegex = /<img[^>]+src="(http:\/\/\S+)"[^>]+alt="([^"]+)"[^>]*>/;
-        const imgMatch = post.content.rendered.match(imgRegex);
-        return {
-            id: post.id,
-            image: imgMatch ? imgMatch[1] : '',
-            title: post.title.rendered,
-            altText: imgMatch && imgMatch[2] ? imgMatch[2] : '',
-            date: new Date(post.date).toLocaleDateString()  // Convert the date to a local date string
-        };
-    });
+        return data.map(post => {
+            const imgRegex = /<img[^>]+src="(http:\/\/\S+)"[^>]+alt="([^"]+)"[^>]*>/;
+            const imgMatch = post.content.rendered.match(imgRegex);
+            return {
+                id: post.id,
+                image: imgMatch ? imgMatch[1] : '',
+                title: htmlDecode(post.title.rendered),
+                altText: imgMatch && imgMatch[2] ? imgMatch[2] : '',
+                date: new Date(post.date).toLocaleDateString()  // Convert the date to a local date string
+            };
+            
+            function htmlDecode(input){
+              var doc = new DOMParser().parseFromString(input, "text/html");
+              return doc.documentElement.textContent;
+            }
+            
+        });
+    } catch (error) {
+        console.error('Failed to fetch posts:', error);
+    }
 }
 
-
-function showPosts(posts) {
+// Display the posts
+function showPosts(postsToDisplay) {
     const container = document.querySelector('.slider__content');
     container.innerHTML = '';
 
-    for (let i = 0; i < postsPerPage; i++) {
-        const post = posts[i % posts.length];
+    postsToDisplay.forEach(post => {
+        // Create post item elements
+        const itemWrapper = createPostElement('div', 'slider__item');
+        const titleWrapper = createPostElement('div', 'slider__headline');
+        const titleElement = createPostElement('h4', '', post.title);
+        const imageWrapper = createPostElement('div', 'slider__image');
+        const img = createPostElement('img', '', '', post.image, post.altText);
+        const dateWrapper = createPostElement('div', 'slider__date');
+        const date = createPostElement('p', '', post.date);
 
-        const itemWrapper = document.createElement('div');
-        itemWrapper.className = 'slider__item';
-
-        const titleWrapper = document.createElement('div');
-        titleWrapper.className = 'slider__headline';
-        const title = document.createElement("h4");
-
-        const div = document.createElement('div');
-        div.innerHTML = post.title;
-        title.innerText = div.textContent;
-
-        titleWrapper.appendChild(title);
-        itemWrapper.appendChild(titleWrapper);
-      
-        const imageWrapper = document.createElement('div');
-        imageWrapper.className = 'slider__image';
-        const img = document.createElement("img");
-        img.src = post.image;
-        img.alt = post.altText;
+        // Build the post item
+        titleWrapper.appendChild(titleElement);
         imageWrapper.appendChild(img);
-        itemWrapper.appendChild(imageWrapper);
-
-        const dateWrapper = document.createElement('div');
-        dateWrapper.className = 'slider__date';
-        const date = document.createElement('p');
-        date.innerText = post.date;
         dateWrapper.appendChild(date);
-        itemWrapper.appendChild(dateWrapper);
+        itemWrapper.append(titleWrapper, imageWrapper, dateWrapper);
 
         itemWrapper.dataset.postId = post.id;
         itemWrapper.addEventListener('click', handlePostItemClick);
-
         container.appendChild(itemWrapper);
+    });
+
+    updateButtonsVisibility(postsToDisplay, currentPostIndex);
+}
+
+// Helper function to create a post element
+function createPostElement(elementType, className = '', innerText = '', src = '', alt = '') {
+    const element = document.createElement(elementType);
+    if (className) element.className = className;
+    if (innerText) element.innerText = innerText;
+    if (elementType === 'img') {
+        element.src = src;
+        element.alt = alt;
     }
+    return element;
 }
 
 function updateButtonsVisibility(posts, currentPostIndex) {
@@ -139,4 +141,3 @@ function updatePostsPerPage() {
   window.addEventListener('resize', updatePostsPerPage);
   
   updatePostsPerPage();
-  
