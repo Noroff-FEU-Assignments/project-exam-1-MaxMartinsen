@@ -62,7 +62,7 @@
 .popup__text span {
     font-weight: 700;
 }
-.popup__button h3 {
+.popup__button {
     padding: 5px 10px;
     border: 1px solid var(--white);
     cursor: pointer;
