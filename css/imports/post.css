@@ -16,3 +16,7 @@ p li {
     cursor: zoom-in;
 }
 
+.post__content p:not(:last-child) {
+    margin-bottom: 5px;
+  }
+

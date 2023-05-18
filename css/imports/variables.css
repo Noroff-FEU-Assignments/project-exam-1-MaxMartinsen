@@ -26,15 +26,15 @@ h1 {
 
 h2 {
   font-weight: 700;
-  font-size: calc(min(6vw, 48px));
-  line-height: calc(min(6.5vw, 57px));
+  font-size: calc(min(9vw, 48px));
+  line-height: calc(min(8.5vw, 57px));
 }
 
 h3,
 .tabs__btn {
   font-weight: 700;
-  font-size: 24px;
-  line-height: 28px;
+  font-size: calc(min(4.5vw, 22px));
+  line-height: calc(min(5.5vw, 18px));
 }
 
 nav {
@@ -63,6 +63,13 @@ nav {
 .menu__link:hover,
 .menu__link.active {
   background-color: var(--lightgrey);
+}
+
+.tabs__btn {
+  text-decoration: underline;
+  text-underline-offset: 7px;
+  text-decoration-thickness: 3px;
+  text-decoration-color: var(--lightgrey);
 }
 
 .tabs__btn:hover,

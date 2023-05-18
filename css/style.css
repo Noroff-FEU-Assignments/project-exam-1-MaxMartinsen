@@ -74,9 +74,6 @@
   color: var(--white);
   padding: 35px 0px 25px 0px;
 }
-.footer__container {
-  max-width: 1023px;
-}
 .footer__inner {
   display: flex;
   justify-content: space-between;
@@ -86,10 +83,11 @@
 .footer__menu {
   display: flex;
   align-items: center;
+  margin-right: 30px;
 }
 .footer__menu__list {
   display: flex;
-  gap: 210px;
+  gap: calc(min(21vw, 315px));
 }
 .footer__text {
   max-width: 808px;
@@ -106,6 +104,11 @@
 .icon-menu {
   display: none;
 }
+
+/* TABLET */
+@media (max-width: 991.98px) {
+}
+
 @media (max-width: 767.98px) {
 /* Header */
 [class*="__container"] {
@@ -130,6 +133,43 @@
   left: 0;
   height: 80px;
   width: 100%;
+}
+/* main */
+.main {
+  display: flex;
+  flex-direction: column;
+}
+/* top */
+.top__inner {
+  position: static;
+  padding-top: calc(min(11vw, 187px));
+  margin-bottom: 70px;
+}
+.top {
+  position: static;
+}
+.title {
+  font-size: calc(min(9vw, 96px));
+  line-height: calc(min(8vw, 108px));
+  margin-bottom: 20px;
+}
+
+/* slider */
+.latest-post__title {
+  margin: 0px;
+}
+.slider__container {
+  padding: 0px 3px;
+}
+.top__link {
+  padding: calc(min(30vw, 20px));
+  max-width: calc(min(66vw, 340px));
+  font-size: calc(min(5vw, 36px));
+}
+.slider__inner button{
+  font-size: 1em;
+  padding: 0px 0px;
+  margin: 115px 5px 95px 5px;
 }
 
 /*-menu-*/
@@ -206,8 +246,60 @@
   display: flex;
 }
 /* footer */
+.footer__logo {
+  margin-bottom: 30px;
+}
+.footer__inner {
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.footer__menu {
+  margin-right: 0px;
+}
 .footer__menu__list {
+  gap: calc(min(11vw, 50px));
+  flex-direction: column;
+  align-items: center;
+}
+
+/* about */
+.about__item {
+  padding: 19px 0 19px 70px;
+}
+.about__item::before {
+  font-size: 30px;
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+/* contact */
+.form__content {
+  padding: 20px 10px;
+}
+.form__row > div:last-child {
+  margin-bottom: 40px;
+}
+.form__row > div {
+  width: 100%;
+}
+/* post */
+.post__content {
+  padding-left: 0px;
+}
+.post__image-trumb {
   display: flex;
-  gap: 29px;
+  justify-content: center;
+}
+.post__row {
+  flex-direction: column;
+}
+.post-image {
+  max-width: 50%;
+  margin-bottom: 20px;
+}
+.popup__image img {
+  max-width: 100%;
 }
 }

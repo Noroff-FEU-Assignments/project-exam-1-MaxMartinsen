@@ -4,7 +4,7 @@
   position: relative;
     color: var(--white);
     text-align: center;
-    padding-top: 48px;
+    padding-top: 50px;
     background-color: var(--black);
   }
 
@@ -15,7 +15,7 @@
   }
   .top__inner {
     position: absolute;
-    padding-top: calc(min(9vw, 170px));
+    padding-top: calc(min(10vw, 187px));
     z-index: 5;
     left: 0;
     right: 0;

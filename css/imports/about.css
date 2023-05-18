@@ -12,14 +12,19 @@
     padding-top: 50px;
   }
   
-  .about__list{
+  .about__list {
     padding: 50px 0 70px;
     counter-reset: myCounter;
-  }
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
   
   .about__item{
     list-style-type: none;
-    width: 270px;
+    max-width: 270px;
     position: relative;
     margin-left: auto;
     box-sizing: content-box;

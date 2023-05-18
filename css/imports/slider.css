@@ -1,6 +1,6 @@
   .slider__inner img {
-    width:250px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.7);
+    max-width: 100%;
+    box-shadow: 0 0 5px rgba(0,0,0,0.7);
   }
   
   .slider__inner button{
@@ -11,6 +11,7 @@
     cursor: pointer;
     background-color: var(--grey);
     padding: 0px 5px;
+    margin: 115px 10px 95px 10px;
   }
   .slider__inner button:active{
     box-shadow: 0 0 10px rgba(0,0,0,0.7);

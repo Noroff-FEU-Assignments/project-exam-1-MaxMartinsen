@@ -24,9 +24,9 @@
 }
 .caption__tabs {
     display: flex;
-    justify-content: space-between;
-    gap: 80px;
-    padding: 0 190px;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
 }
 .tabs__btn {
 }
@@ -49,7 +49,7 @@
 }
 .post-image,
 .posts-image {
-    max-width: 270px;
+    max-width: 100%;
     margin-bottom: 10px;
 }
 .post-back__inner,

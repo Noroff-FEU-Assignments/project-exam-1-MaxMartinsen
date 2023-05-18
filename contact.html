@@ -11,11 +11,12 @@
 </head>
 <body>
     <div class="wrapper">
-        <header class="header">
-            <div class="header__container">
-                <div class="header__inner">
-                    <a href="#" class="header__logo"><img src="/assets/image_landing/logo_tech.svg" alt="TECH logo" class="logo__img"></a>
-                    <nav class="menu__body">
+      <header class="header" id="open">
+        <div class="header__container" id="close">
+            <div class="header__inner">
+                <a href="/index.html#index" class="header__logo"><img src="/assets/image_landing/logo_tech.svg" alt="TECH logo" class="logo__img"></a>
+                <div class="header__menu menu" id="index">
+                    <nav class="menu__body" id="menu">
                         <ul class="menu__list">
                             <li class="menu__item"><a href="/index.html" class="menu__link">Home</a></li>
                             <li class="menu__item"><a href="/blog.html" class="menu__link">Blog</a></li>
@@ -24,8 +25,11 @@
                         </ul>
                     </nav>
                 </div>
+                <a href="#open" class="icon-menu"><span></span><i>1</i></a>
+                <a href="#close" class="close-icon-menu"><i>0</i></a>
             </div>
-        </header>
+        </div>
+    </header>
         <main class="main">
             <section class="content margin70">
                 <div class="content__container">
@@ -111,26 +115,26 @@
             </section>
         </main>
         <footer class="footer">
-            <div class="footer__container">
-                <div class="footer__inner">
-                    <a href="#" class="header__logo"><img src="/assets/image_landing/logo_footer.svg" alt="TECH logo" class="logo__img"></a>
-                    <nav class="footer__menu">
-                        <ul class="footer__menu__list">
-                            <li class="footer__menu__list-item"><a href="#" class="footer__menu__list-link">Blog</a></li>
-                            <li class="footer__menu__list-item"><a href="#" class="footer__menu__list-link">About</a></li>
-                            <li class="footer__menu__list-item"><a href="#" class="footer__menu__list-link">Contact</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="footer__text">
-                    <p>For any inquiries about our auto blog content, please email us at <span>ev.max@hotmail.com</span>.</p>
-                    <p>The information provided on this blog is for educational and informational purposes only and should not be construed as professional advice.</p>
-                    <p>We strive to provide accurate and up-to-date information, but we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability or availability with respect to the blog or the information, products, services, or related graphics contained on the blog for any purpose.</p>
-                    <p>Any reliance you place on such information is therefore strictly at your own risk.</p>
-                </div>
-            </div>
-            <div class="footer__copyright"><p>&copy; 2022. TECH All Rights Reserved.</p></div>
-        </footer>
+          <div class="footer__container">
+              <div class="footer__inner">
+                  <a href="/index.html#index" class="footer__logo"><img src="/assets/image_landing/logo_footer.svg" alt="TECH logo" class="logo__img"></a>
+                  <nav class="footer__menu">
+                      <ul class="footer__menu__list">
+                          <li class="footer__menu__list-item"><a href="/blog.html" class="footer__menu__list-link">Blog</a></li>
+                          <li class="footer__menu__list-item"><a href="/about.html" class="footer__menu__list-link">About</a></li>
+                          <li class="footer__menu__list-item"><a href="/contact.html" class="footer__menu__list-link active">Contact</a></li>
+                      </ul>
+                  </nav>
+              </div>
+              <div class="footer__text">
+                  <p>For any inquiries about our auto blog content, please email us at <span>ev.max@hotmail.com</span>.</p>
+                  <p>The information provided on this blog is for educational and informational purposes only and should not be construed as professional advice.</p>
+                  <p>We strive to provide accurate and up-to-date information, but we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability or availability with respect to the blog or the information, products, services, or related graphics contained on the blog for any purpose.</p>
+                  <p>Any reliance you place on such information is therefore strictly at your own risk.</p>
+              </div>
+          </div>
+          <div class="footer__copyright"><p>&copy; 2022. TECH All Rights Reserved.</p></div>
+      </footer>
     </div>
     <script src="/js/contact.js"></script>
 </body>

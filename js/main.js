@@ -1,4 +1,10 @@
-const postsPerPage = 4;
+let postsPerPage;
+if (window.matchMedia("(max-width: 767.98px)").matches) {
+  postsPerPage = 2;
+} else {
+  postsPerPage = 4;
+}
+
 let currentPostIndex = 0;
 let posts = [];
 
@@ -119,3 +125,18 @@ function handlePostItemClick(event) {
     const postId = event.currentTarget.dataset.postId;
     window.location.href = `post.html?id=${postId}`;
 }
+function updatePostsPerPage() {
+    if (window.matchMedia("(max-width: 767.98px)").matches) {
+      postsPerPage = 2;
+    } else {
+      postsPerPage = 4;
+    }
+    currentPostIndex = 0;
+    showPosts(posts.slice(currentPostIndex, currentPostIndex + postsPerPage));
+    updateButtonsVisibility(posts, currentPostIndex);
+}
+  
+  window.addEventListener('resize', updatePostsPerPage);
+  
+  updatePostsPerPage();
+  

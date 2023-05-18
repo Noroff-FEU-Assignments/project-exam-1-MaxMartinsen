@@ -28,7 +28,7 @@
   }
   
   label.active {
-    transform: translateY(38px);
+    transform: translateY(40px);
     left: 12px;
     font-size: 14px;
   }
@@ -37,10 +37,6 @@
     transform: translateY(94px);
     left: 12px;
     font-size: 14px;
-  }
-  
-  label.active .req {
-    opacity: 0;
   }
   
   label.highlight {
