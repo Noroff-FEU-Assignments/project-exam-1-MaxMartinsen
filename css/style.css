@@ -171,6 +171,9 @@
   flex-direction: column;
   align-items: center;
 }
+.slider__headline {
+  height: 75px;
+}
 
 /*-menu-*/
 .menu__body {
