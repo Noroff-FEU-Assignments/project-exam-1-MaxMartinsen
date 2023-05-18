@@ -12,8 +12,8 @@ let posts = [];
 const apiBase = "http://carblog.maxmartinsen.pw";
 const jsonBase = "/wp-json/wp/v2";
 const postsBase = "/posts";
-const perPageAll = "?per_page=99";
-const perPageTen = "?per_page=10";
+const perPageAll = "?per_page=99&_embed";
+const perPageTen = "?per_page=10&_embed";
 
 // Full URL
 const fullPostURL = apiBase + jsonBase + postsBase + perPageAll;
