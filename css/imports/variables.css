@@ -31,7 +31,8 @@ h2 {
 }
 
 h3,
-.tabs__btn {
+.tabs__btn,
+.popup__button {
   font-weight: 700;
   font-size: calc(min(4.5vw, 22px));
   line-height: calc(min(5.5vw, 18px));
