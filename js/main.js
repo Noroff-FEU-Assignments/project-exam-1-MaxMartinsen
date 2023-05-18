@@ -5,7 +5,7 @@ const leftBtn = document.getElementById("leftBtn");
 const rightBtn = document.getElementById("rightBtn");
 
 // Base URL
-const apiBase = "http://carblog.maxmartinsen.pw";
+const apiBase = "https://carblog.maxmartinsen.pw";
 const jsonBase = "/wp-json/wp/v2";
 const postsBase = "/posts";
 const perPageAll = "?per_page=99&_embed";
@@ -21,7 +21,7 @@ async function getPosts(url) {
         const data = await response.json();
 
         return data.map(post => {
-            const imgRegex = /<img[^>]+src="(http:\/\/\S+)"[^>]+alt="([^"]+)"[^>]*>/;
+            const imgRegex = /<img[^>]+src="(https:\/\/\S+)"[^>]+alt="([^"]+)"[^>]*>/;
             const imgMatch = post.content.rendered.match(imgRegex);
             return {
                 id: post.id,

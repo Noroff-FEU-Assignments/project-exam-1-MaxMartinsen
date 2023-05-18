@@ -1,5 +1,5 @@
 // Base URL
-const apiBase = "http://carblog.maxmartinsen.pw";
+const apiBase = "https://carblog.maxmartinsen.pw";
 const jsonBase = "/wp-json/wp/v2";
 const postsBase = "/posts";
 const perPageAll = "?per_page=99&_embed";
@@ -28,7 +28,7 @@ function createPostHTML(latestPost) {
   inner.appendChild(postItem);
 
   // Image
-  const imgRegex = /<img[^>]+src="(http:\/\/\S+)"[^>]+alt="([^"]+)"[^>]*>/;
+  const imgRegex = /<img[^>]+src="(https:\/\/\S+)"[^>]+alt="([^"]+)"[^>]*>/;
   const imgMatch = latestPost.content.rendered.match(imgRegex);
   if (imgMatch && imgMatch[1]) {
     const imageUrl = imgMatch[1];

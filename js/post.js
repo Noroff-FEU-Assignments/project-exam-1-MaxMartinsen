@@ -3,7 +3,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get('id');
 
 // Base URL
-const apiBase = "http://carblog.maxmartinsen.pw";
+const apiBase = "https://carblog.maxmartinsen.pw";
 const jsonBase = "/wp-json/wp/v2";
 const postsBase = "/posts";
 
@@ -51,7 +51,7 @@ function createPostDetailHTML(post) {
   }
 
 // Image
-const imgRegex = /<img[^>]+src="(http:\/\/\S+)"[^>]+alt="([^"]+)"[^>]*>/;
+const imgRegex = /<img[^>]+src="(https:\/\/\S+)"[^>]+alt="([^"]+)"[^>]*>/;
 const imgMatch = post.content.rendered.match(imgRegex);
 
 const imageWrapper = document.createElement('a');
