@@ -21,7 +21,7 @@ async function getPosts(url) {
         const data = await response.json();
 
         return data.map(post => {
-            const imgRegex = /<img[^>]+src="(http:\/\/\S+)"[^>]+alt="([^"]+)"[^>]*>/;
+            const imgRegex = /<img[^>]+src="(https:\/\/\S+)"[^>]+alt="([^"]+)"[^>]*>/;
             const imgMatch = post.content.rendered.match(imgRegex);
             return {
                 id: post.id,
