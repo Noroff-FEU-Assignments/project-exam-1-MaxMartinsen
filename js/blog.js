@@ -1,5 +1,5 @@
 // Base URL
-const apiBase = "http://carblog.maxmartinsen.pw";
+const apiBase = "https://carblog.maxmartinsen.pw";
 const jsonBase = "/wp-json/wp/v2";
 const postsBase = "/posts";
 const perPageAll = "?per_page=99&_embed";
