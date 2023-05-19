@@ -51,7 +51,7 @@ function showPosts(postsToDisplay) {
         // Create post item elements
         const itemWrapper = createPostElement('div', 'slider__item');
         const titleWrapper = createPostElement('div', 'slider__headline');
-        const titleElement = createPostElement('h4', '', post.title);
+        const titleElement = createPostElement('p', '', post.title);
         const imageWrapper = createPostElement('div', 'slider__image');
         const img = createPostElement('img', '', '', post.image, post.altText);
         const dateWrapper = createPostElement('div', 'slider__date');
