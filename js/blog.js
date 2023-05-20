@@ -47,12 +47,11 @@ function createPostHTML(latestPost) {
     const subtitleText = subtitleMatch[1];
     const subtitle = document.createElement("p");
     subtitle.innerHTML = "- " + subtitleText;
-      postItem.appendChild(subtitle);
+    postItem.appendChild(subtitle);
+  }
 
   // Add click event listener
   postItem.addEventListener('click', handlePostItemClick);
-}
-  
 }
 
 function createPostsHTML(postId) {
