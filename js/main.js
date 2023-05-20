@@ -1,8 +1,13 @@
-let postsPerPage;
+// Constants
+const postsPerPageMobile = 2;
+const postsPerPageDesktop = 4;
+const maxWidthMobile = "767.98px";
+
+let postsPerPage = 1;
 let currentPostIndex = 0;
 let posts = [];
-const leftBtn = document.getElementById("leftBtn");
-const rightBtn = document.getElementById("rightBtn");
+let leftBtn;
+let rightBtn;
 
 // Base URL
 const apiBase = "https://carblog.maxmartinsen.pw";
@@ -11,7 +16,13 @@ const postsBase = "/posts";
 const perPageAll = "?per_page=99&_embed";
 
 // Full URL
-const fullPostURL = apiBase + jsonBase + postsBase + perPageAll;
+const fullPostURL = `${apiBase}${jsonBase}${postsBase}${perPageAll}`;
+
+// Function to decode HTML entities
+function htmlDecode(input){
+    let doc = new DOMParser().parseFromString(input, "text/html");
+    return doc.documentElement.textContent;
+}
 
 // Fetching the posts
 async function getPosts(url) {
@@ -27,19 +38,26 @@ async function getPosts(url) {
                 id: post.id,
                 image: imgMatch ? imgMatch[1] : '',
                 title: htmlDecode(post.title.rendered),
-                altText: imgMatch && imgMatch[2] ? imgMatch[2] : '',
-                date: new Date(post.date).toLocaleDateString()  // Convert the date to a local date string
+                altText: imgMatch && imgMatch[2] ? imgMatch[2] : 'Image description unavailable',
+                date: new Date(post.date).toLocaleDateString()
             };
-            
-            function htmlDecode(input){
-              var doc = new DOMParser().parseFromString(input, "text/html");
-              return doc.documentElement.textContent;
-            }
-            
         });
     } catch (error) {
         console.error('Failed to fetch posts:', error);
+        return [];
     }
+}
+
+// Helper function to create a post element
+function createPostElement(elementType, className = '', innerText = '', src = '', alt = '') {
+    const element = document.createElement(elementType);
+    if (className) element.className = className;
+    if (innerText) element.innerText = innerText;
+    if (elementType === 'img') {
+        element.src = src;
+        element.alt = alt;
+    }
+    return element;
 }
 
 // Display the posts
@@ -71,35 +89,10 @@ function showPosts(postsToDisplay) {
     updateButtonsVisibility(postsToDisplay, currentPostIndex);
 }
 
-// Helper function to create a post element
-function createPostElement(elementType, className = '', innerText = '', src = '', alt = '') {
-    const element = document.createElement(elementType);
-    if (className) element.className = className;
-    if (innerText) element.innerText = innerText;
-    if (elementType === 'img') {
-        element.src = src;
-        element.alt = alt;
-    }
-    return element;
-}
-
 function updateButtonsVisibility(posts, currentPostIndex) {
-    const leftBtn = document.getElementById("leftBtn");
-    const rightBtn = document.getElementById("rightBtn");
-
-    if (currentPostIndex === 0) {
-        leftBtn.style.visibility = "hidden"; 
-    } else {
-        leftBtn.style.visibility = "visible";
-    }
-
-    if (currentPostIndex + postsPerPage >= posts.length) {
-        rightBtn.style.visibility = "hidden";
-    } else {
-        rightBtn.style.visibility = "visible";
-    }
+    leftBtn.style.visibility = currentPostIndex === 0 ? "hidden" : "visible";
+    rightBtn.style.visibility = currentPostIndex + postsPerPage >= posts.length ? "hidden" : "visible";
 }
-
 
 function showNextPosts() {
     currentPostIndex = (currentPostIndex + postsPerPage) % posts.length;
@@ -113,58 +106,42 @@ function showPrevPosts() {
     updateButtonsVisibility(posts, currentPostIndex);
 }
 
-getPosts(fullPostURL).then(data => {
-    posts = data;
-    showPosts(posts.slice(currentPostIndex, currentPostIndex + postsPerPage));
-    updateButtonsVisibility(posts, currentPostIndex);
-
-    document.getElementById('leftBtn').addEventListener('click', showPrevPosts);
-    document.getElementById('rightBtn').addEventListener('click', showNextPosts);
-}).catch(console.error);
-
-
 function handlePostItemClick(event) {
     const postId = event.currentTarget.dataset.postId;
     window.location.href = `post.html?id=${postId}`;
 }
+
 function updatePostsPerPage() {
     const slider = document.getElementById('slider');
     const content = document.querySelector('.slider__content');
-    const leftBtn = document.getElementById('leftBtn');
-    const rightBtn = document.getElementById('rightBtn');
+    
+    leftBtn = document.getElementById('leftBtn');
+    rightBtn = document.getElementById('rightBtn');
 
-    // If the width is 767.98px or less
-    if (window.matchMedia("(max-width: 767.98px)").matches) {
-        postsPerPage = 2;
+    if (!leftBtn || !rightBtn) {
+        console.error('Button elements not found');
+        return;
+    }
 
-        // Check if buttons already moved to new container
+    if (window.matchMedia(`(max-width: ${maxWidthMobile})`).matches) {
+        postsPerPage = postsPerPageMobile;
+        
         if (!document.querySelector('.slider__buttons')) {
-            // Create new div for the buttons
-            const buttonsContainer = document.createElement('div');
-            buttonsContainer.className = 'slider__buttons';
-
-            // Append the buttons to the new div
-            buttonsContainer.appendChild(leftBtn);
-            buttonsContainer.appendChild(rightBtn);
-
-            // Append the new div to the slider
+            const buttonsContainer = createPostElement('div', 'slider__buttons');
+            buttonsContainer.append(leftBtn, rightBtn);
             slider.appendChild(buttonsContainer);
         }
     } else {
-        postsPerPage = 4;
-
-        // If width is more than 767.98px and buttons are in separate container, move them back
+        postsPerPage = postsPerPageDesktop;
+        
         if (document.querySelector('.slider__buttons')) {
             const buttonsContainer = document.querySelector('.slider__buttons');
-
-            // Move the buttons back to the slider
             slider.insertBefore(leftBtn, content);
             slider.insertBefore(rightBtn, content.nextSibling);
-
-            // Remove the buttons container
             buttonsContainer.remove();
         }
     }
+
     currentPostIndex = 0;
     showPosts(posts.slice(currentPostIndex, currentPostIndex + postsPerPage));
     updateButtonsVisibility(posts, currentPostIndex);
@@ -172,5 +149,12 @@ function updatePostsPerPage() {
 
 window.addEventListener('resize', updatePostsPerPage);
 
-updatePostsPerPage();
+getPosts(fullPostURL).then(data => {
+    posts = data;
+    updatePostsPerPage();
 
+    if (leftBtn && rightBtn) {
+        leftBtn.addEventListener('click', showPrevPosts);
+        rightBtn.addEventListener('click', showNextPosts);
+    }
+}).catch(console.error);
