@@ -12,14 +12,21 @@ const tenPostURL = apiBase + jsonBase + postsBase + perPageTen;
 // Fetching the posts
 async function getpostId(url) {
   const response = await fetch(url);
+  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
   const postId = await response.json();
-
   return postId;
+}
+
+function sanitizeHTML(text) {
+  const tempDiv = document.createElement('div');
+  tempDiv.textContent = text;
+  return tempDiv.innerHTML;
 }
 
 // Create HTML
 function createPostHTML(latestPost) {
   const inner = document.querySelector(".posts__inner");
+  if (!inner) return;
 
   // Create post item inner
   const postItem = document.createElement("div");
@@ -44,9 +51,9 @@ function createPostHTML(latestPost) {
   const subtitleRegex = /\n<p>&#8211; (.*?)<\/p>/;
   const subtitleMatch = latestPost.content.rendered.match(subtitleRegex);
   if (subtitleMatch && subtitleMatch[1]) {
-    const subtitleText = subtitleMatch[1];
+    const subtitleText = sanitizeHTML(subtitleMatch[1]);
     const subtitle = document.createElement("p");
-    subtitle.innerHTML = "- " + subtitleText;
+    subtitle.textContent = "- " + subtitleText;
     postItem.appendChild(subtitle);
   }
 
@@ -55,16 +62,17 @@ function createPostHTML(latestPost) {
 }
 
 function createPostsHTML(postId) {
-    // Clear existing posts
-    const inner = document.querySelector(".posts__inner");
-    inner.innerHTML = '';
-  
-    for (let i = 0; i < postId.length; i++) {
-      const latestPost = postId[i];
-      createPostHTML(latestPost);
-    }
+  // Clear existing posts
+  const inner = document.querySelector(".posts__inner");
+  if (!inner) return;
+  inner.innerHTML = '';
+
+  for (let i = 0; i < postId.length; i++) {
+    const latestPost = postId[i];
+    createPostHTML(latestPost);
   }
-  
+}
+
 // Fetch and display initial 10 posts
 getpostId(tenPostURL).then(postId => {
   createPostsHTML(postId);
@@ -73,25 +81,26 @@ getpostId(tenPostURL).then(postId => {
 });
 
 // Event listener for the "Show more" button
-const allPostInner = document.querySelector(".posts-allposts__inner")
+const allPostInner = document.querySelector(".posts-allposts__inner");
 const showMoreButton = document.querySelector(".posts__allposts");
-showMoreButton.addEventListener('click', () => {
-  getpostId(fullPostURL).then(postId => {
-    createPostsHTML(postId);
+if (showMoreButton) {
+  showMoreButton.addEventListener('click', () => {
+    getpostId(fullPostURL).then(postId => {
+      createPostsHTML(postId);
 
-    // Add the .none class to the button to hide it after being clicked
-    allPostInner.classList.add('none');
+      // Add the .none class to the button to hide it after being clicked
+      allPostInner.classList.add('none');
 
-    // Remove active class from all category buttons
-    const categoryButtons = document.querySelectorAll('.tabs__btn.category');
-    categoryButtons.forEach(button => {
-      button.classList.remove('active');
+      // Remove active class from all category buttons
+      const categoryButtons = document.querySelectorAll('.tabs__btn.category');
+      categoryButtons.forEach(button => {
+        button.classList.remove('active');
+      });
+    }).catch(error => {
+      console.error('Error fetching data:', error);
     });
-
-  }).catch(error => {
-    console.error('Error fetching data:', error);
   });
-});
+}
 
 function handlePostItemClick(event) {
   const postId = event.currentTarget.dataset.postId;
@@ -123,10 +132,5 @@ categoryButtons.forEach(button => {
     });
   });
 });
-
-
-
-
-
 
 
