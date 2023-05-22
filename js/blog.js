@@ -4,6 +4,8 @@ const jsonBase = "/wp-json/wp/v2";
 const postsBase = "/posts";
 const perPageAll = "?per_page=99&_embed";
 const perPageTen = "?per_page=10&_embed";
+const allPostInner = document.querySelector(".posts-allposts__inner");
+const categoryButtons = document.querySelectorAll('.tabs__btn.category');
 
 // Full URL
 const fullPostURL = apiBase + jsonBase + postsBase + perPageAll;
@@ -12,16 +14,13 @@ const tenPostURL = apiBase + jsonBase + postsBase + perPageTen;
 // Fetching the posts
 async function getpostId(url) {
   const response = await fetch(url);
-  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}, URL: ${url}`);
   const postId = await response.json();
   return postId;
 }
 
-function sanitizeHTML(text) {
-  const tempDiv = document.createElement('div');
-  tempDiv.textContent = text;
-  return tempDiv.innerHTML;
-}
+// Subtitle
+const subtitleRegex = /<p>&#8211; (.*?)<\/p>/;
 
 // Create HTML
 function createPostHTML(latestPost) {
@@ -39,7 +38,7 @@ function createPostHTML(latestPost) {
   const imgMatch = latestPost.content.rendered.match(imgRegex);
   if (imgMatch && imgMatch[1]) {
     const imageUrl = imgMatch[1];
-    const imgAlt = imgMatch[2];
+    const imgAlt = imgMatch[2] ? imgMatch[2] : "Image description unavailable";
     const img = document.createElement("img");
     img.src = imageUrl;
     img.alt = imgAlt;
@@ -47,13 +46,10 @@ function createPostHTML(latestPost) {
     postItem.appendChild(img);
   }
 
-  // Subtitle
-  const subtitleRegex = /\n<p>&#8211; (.*?)<\/p>/;
   const subtitleMatch = latestPost.content.rendered.match(subtitleRegex);
   if (subtitleMatch && subtitleMatch[1]) {
-    const subtitleText = sanitizeHTML(subtitleMatch[1]);
     const subtitle = document.createElement("p");
-    subtitle.textContent = "- " + subtitleText;
+    subtitle.innerHTML = "- " + subtitleMatch[1];
     postItem.appendChild(subtitle);
   }
 
@@ -81,7 +77,6 @@ getpostId(tenPostURL).then(postId => {
 });
 
 // Event listener for the "Show more" button
-const allPostInner = document.querySelector(".posts-allposts__inner");
 const showMoreButton = document.querySelector(".posts__allposts");
 if (showMoreButton) {
   showMoreButton.addEventListener('click', () => {
@@ -108,7 +103,6 @@ function handlePostItemClick(event) {
 }
 
 // Event listener for the category buttons
-const categoryButtons = document.querySelectorAll('.tabs__btn.category');
 categoryButtons.forEach(button => {
   button.addEventListener('click', () => {
     // Remove active class from all buttons
@@ -132,5 +126,3 @@ categoryButtons.forEach(button => {
     });
   });
 });
-
-

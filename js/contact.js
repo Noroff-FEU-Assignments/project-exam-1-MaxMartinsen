@@ -1,4 +1,3 @@
-// contact
 // Form field interaction
 document.querySelectorAll('.form__content input, .form__content textarea').forEach(element => {
     element.addEventListener('keyup', e => {
