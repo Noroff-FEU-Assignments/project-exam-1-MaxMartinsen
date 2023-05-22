@@ -130,3 +130,48 @@ document.getElementById('submitBtn').addEventListener('click', e => {
     }
 });
 
+// Form submission
+document.getElementById('submitBtn').addEventListener('click', e => {
+    e.preventDefault();
+
+    let isValid = validationRules.every(({id, labelId, test, errorMsg, successMsg}) => {
+        const input = document.getElementById(id);
+        const label = document.getElementById(labelId);
+        
+        if (test(input.value)) {
+            label.innerHTML = `${successMsg}<span class='req'>*</span>`;
+            label.classList.remove('error');
+            return true;
+        } else {
+            label.innerHTML = `${errorMsg}<span class='req'>*</span>`;
+            label.classList.add('error');
+            return false;
+        }
+    });
+
+    if (isValid) {
+        // Collect form data
+        const formData = new FormData();
+        validationRules.forEach(({id}) => {
+            formData.append(id, document.getElementById(id).value);
+        });
+
+        // Send data to server
+        fetch('https://carblog.maxmartinsen.pw/wp-json/myplugin/v1/contact-form-submissions/', {
+            method: 'POST',
+            body: formData
+        }).then(response => response.json()).then(data => {
+            // Handle response here
+            if(data.success) {
+                window.location.href = "#popup-gratitude";
+            } else {
+                window.location.href = "#popup-cancellation";
+            }
+        }).catch(error => {
+            // Handle error here
+            console.error('Error:', error);
+        });
+    } else {
+        window.location.href = "#popup-cancellation";
+    }
+});
