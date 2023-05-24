@@ -11,8 +11,6 @@
   .top img {
     max-width: 100%;
   }
-  .top__container {
-  }
   .top__inner {
     position: absolute;
     padding-top: calc(min(10vw, 187px));
@@ -41,11 +39,11 @@
   .latest-posts {
     margin-bottom: 50px;
   }
-  .latest-posts__container {
-  }
+
   .latest-post__title h2 {
     margin-bottom: 21px;
   }
+  
   .latest-post__title p {
     max-width: 580px;
     margin: 0 auto;

@@ -7,36 +7,18 @@
     text-align: center;
     text-transform: uppercase;
 }
-.content__container {
-}
-.content__subtitle {
-}
 
 /*- caption -*/
 
-.caption {
-}
-.caption__container {
-}
-.caption__inner {
-}
-.caption__title {
-}
 .caption__tabs {
     display: flex;
     justify-content: center;
     gap: 40px;
     flex-wrap: wrap;
 }
-.tabs__btn {
-}
 
 /*- posts -*/
 
-.posts {
-}
-.posts__container {
-}
 .posts__inner{
     display: flex;
     flex-wrap: wrap;
