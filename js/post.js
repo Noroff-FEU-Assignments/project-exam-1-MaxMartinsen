@@ -1,3 +1,4 @@
+/* Post */
 // Get post ID from the URL query parameter
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get('id');
