@@ -19,4 +19,15 @@ p li {
 .post__content p:not(:last-child) {
     margin-bottom: 5px;
   }
-
+/* comment */
+.comment__item > div:not(:last-child) {
+    margin-bottom: 10px;
+}
+.comment__text,
+.comment__author,
+.comment__date {
+    padding: 5px 10px;
+}
+.comment__date {
+    text-align: right;
+}

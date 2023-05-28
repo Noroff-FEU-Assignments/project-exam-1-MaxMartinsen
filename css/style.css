@@ -281,6 +281,7 @@
   transform: translate(0, -50%);
 }
 /* contact */
+.comment__item,
 .form__content {
   padding: 20px 10px;
 }

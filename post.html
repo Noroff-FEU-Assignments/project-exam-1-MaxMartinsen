@@ -53,11 +53,90 @@
                 <div class="post__container">
                   <div class="post__inner margin70">
                   </div>
-                  <div class="post-back__inner margin70">
-                    <button class="post__back" id="backToBlog">Back to blog</button>
-                  </div>
                 </div>
             </div>
+            <div class="comment">
+                <div class="comment__container">
+                    <div class="comment__published">
+                        <div class="comment__subtitle">
+                            <h3>Comments</h3>
+                        </div>
+                        <div class="comment__list margin70">
+                        </div>
+                    </div>
+                    <div class="form__subtitle">
+                        <h3>Leave your comment here:</h3>
+                    </div>
+                    <div class="form__holder margin70">
+                        <div class="form__content">
+                            <form action="/" method="post">
+                                <div class="form__wrap">
+                                    <label id="nameLabel" for="nameInput">
+                                      Name<span class="req">*</span>
+                                    </label>
+                                    <input id="nameInput" type="text" required autocomplete="off">
+                                </div>
+                                <div class="form__wrap">
+                                    <label id="emailLabel" for="emailInput">
+                                      Email Address<span class="req">*</span>
+                                    </label>
+                                    <input id="emailInput" type="email" required autocomplete="off">
+                                </div>
+                                <div class="form__wrap message__content">
+                                  <label id="messageLabel" for="messageInput">
+                                    Comment content<span class="req">*</span>
+                                  </label>
+                                  <textarea id="messageInput" cols="30" rows="3" required autocomplete="off"></textarea>
+                                </div>
+                                <button id="submitBtn" type="submit" class="button button-block">Send comment</button>
+                              </form>
+                        </div>
+                    </div>
+                    <div class="post-back__inner margin70">
+                        <button class="post__back" id="backToBlog">Back to blog</button>
+                    </div>
+                </div>
+            </div>
+            <section class="popup-gratitude">
+                <div class="popup" id="popup-gratitude">
+                  <a href="/index.html" class="popup__area"><i>gratitude</i></a>
+                  <div class="popup__body">
+                      <div class="popup__content">
+                          <a href="#" class="popup__close"><h3 class="close">X</h3></a>
+                          <div class="popup__subtitle"><h3>Thank you!</h3></div>
+                          <div class="popup__text">
+                            <p>We are pleased to inform you that your comment has been <br> <span>successfully submitted</span>.</p>
+                            <p>Our system has received and processed the comment you provided.</p>
+                            <p>Our team will now review the comment and perform any necessary calculations or analysis based on it. We appreciate your patience during this process, and we will notify you promptly with the results or any further actions required.</p>
+                            <p>Thank you for choosing TECH for your comment!</p>
+                            <p>Best regards,</p>
+                            <p>The TECH Team</p>
+                          </div>
+                          <button class="popup__button" onclick="window.location.href='/post.html?id=' + postId;">Back to post</button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section class="popup-cancellation">
+                <div class="popup" id="popup-cancellation">
+                  <a href="#" class="popup__area"><i>cancellation</i></a>
+                  <div class="popup__body">
+                      <div class="popup__content">
+                          <a href="#" class="popup__close"><h3 class="close">X</h3></a>
+                          <div class="popup__subtitle"><h3>Sorry!</h3></div>
+                          <div class="popup__text">
+                            <p>We regret to inform you that your comment <span>was not sent</span> due to errors in it. Our system encountered issues while processing the comment you provided. Please review the comment and ensure that it is correct and free of any errors.</p>
+                            <p>If you need assistance or have any questions, please don't hesitate to contact our support team. We apologize for any inconvenience caused and appreciate your understanding.</p>
+                            <p>Thank you for your cooperation.</p>
+                            <p>The TECH Team.</p>
+                          </div>
+                          <button class="popup__button" onclick="window.location.href='#';">
+                            Back to post
+                          </button>
+                    </div>
+                  </div>
+                </div>
+              </section>
             <div class="popup" id="popup">
                 <a href="#popup__anchor" class="popup__area"><i>4</i></a>
                 <div class="popup__body">
