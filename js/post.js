@@ -1,9 +1,14 @@
 // Get post ID from the URL query parameter
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get('id');
+window.postId = urlParams.get('id');
 
-import { apiBase, jsonBase, commentsURL, postURL } from './components/urlManager.js';
+import {  postURL, getCommentsURL, commentURL } from './components/urlManager.js';
+import { formInteraction, tabNavigation } from './components/formManeger.js';
 import { getPost, getComments, postComment } from './components/apiManager.js';
+
+formInteraction();
+tabNavigation();
 
 
 function createPostDetailHTML(post) {
@@ -91,7 +96,7 @@ getPost(postURL).then(post => {
   document.title = `Tech | ${cleanTitle}`;
 
   // Fetch and display comments
-  const commentsURL = `${apiBase}${jsonBase}/comments?post=${postId}`;
+  const commentsURL = getCommentsURL(window.postId);
   getComments(commentsURL).then(comments => {
     let commentList = document.querySelector('.comment__list');
     comments.forEach(comment => {
@@ -123,7 +128,7 @@ document.querySelector('form').addEventListener('submit', (event) => {
     'author_email': email,
     'content': content
   };
-  postComment(commentsURL, newComment)
+  postComment(commentURL, newComment)
   .then(comment => {
     if (!comment || comment.status !== 'success') {
       throw new Error("Comment was not created successfully");
@@ -142,13 +147,6 @@ const backToBlogButton = document.getElementById('backToBlog');
 backToBlogButton.addEventListener('click', () => {
   window.location.href = 'blog.html';
 });
-
-import { formInteraction, tabNavigation } from './components/formManeger.js';
-
-formInteraction();
-tabNavigation();
-
-
 
 // Form validation
 const validationRules = [
@@ -221,7 +219,7 @@ document.getElementById('submitBtn').addEventListener('click', async e => {
     };
 
     try {
-      let comment = await postComment(commentsURL, newComment);
+      let comment = await postComment(commentURL, newComment);
       if (!comment || comment.status !== 'success') {
         throw new Error("Comment was not created successfully");
       }
@@ -240,4 +238,3 @@ document.getElementById('submitBtn').addEventListener('click', async e => {
     window.location.href = "#popup-cancellation";
   }
 });
-

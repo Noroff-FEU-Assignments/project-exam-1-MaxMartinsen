@@ -10,7 +10,11 @@ const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get('id');
 
 // Comments URL
+export const commentURL = `${apiBase}/wp-json/custom/v1/comment`;
 export const commentsURL = `${apiBase}${jsonBase}/comments?post=${postId}`;
+export function getCommentsURL(postId) {
+    return `${apiBase}${jsonBase}/comments?post=${postId}`;
+  }
 
 // Full URL
 export const postURL = `${apiBase}${jsonBase}${postsBase}/${postId}?_embed`;
