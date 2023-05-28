@@ -1,23 +1,9 @@
-// Base URL
-const apiBase = "https://carblog.maxmartinsen.pw";
-const jsonBase = "/wp-json/wp/v2";
-const postsBase = "/posts";
-const perPageAll = "?per_page=99&_embed";
-const perPageTen = "?per_page=10&_embed";
+
 const allPostInner = document.querySelector(".posts-allposts__inner");
 const categoryButtons = document.querySelectorAll('.tabs__btn.category');
 
-// Full URL
-const fullPostURL = apiBase + jsonBase + postsBase + perPageAll;
-const tenPostURL = apiBase + jsonBase + postsBase + perPageTen;
-
-// Fetching the posts
-async function getpostId(url) {
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}, URL: ${url}`);
-  const postId = await response.json();
-  return postId;
-}
+import { tenPostURL, fullPostURL } from './components/urlManager.js';
+import { getpostId } from './components/apiManager.js';
 
 // Subtitle
 const subtitleRegex = /<p>&#8211; (.*?)<\/p>/;

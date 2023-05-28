@@ -2,43 +2,9 @@
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get('id');
 
-// Base URL
-const apiBase = "https://carblog.maxmartinsen.pw";
-const jsonBase = "/wp-json/wp/v2";
-const postsBase = "/posts";
+import { apiBase, jsonBase, commentsURL, postURL } from './components/urlManager.js';
+import { getPost, getComments, postComment } from './components/apiManager.js';
 
-// Comments URL
-let commentsURL = `${apiBase}/wp-json/custom/v1/comment`;
-
-// Full URL
-const postURL = `${apiBase}${jsonBase}${postsBase}/${postId}?_embed`;
-
-// Fetch the post
-async function getPost(url) {
-  const response = await fetch(url);
-  const post = await response.json();
-  return post;
-}
-
-// Fetch comments
-async function getComments(url) {
-  const response = await fetch(url);
-  const comments = await response.json();
-  return comments;
-}
-
-// Post a comment
-async function postComment(url, comment) {
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(comment)
-  });
-  const newComment = await response.json();
-  return newComment;
-}
 
 function createPostDetailHTML(post) {
   const postInner = document.querySelector('.post__inner');
@@ -177,64 +143,12 @@ backToBlogButton.addEventListener('click', () => {
   window.location.href = 'blog.html';
 });
 
-// Form field interaction
-document.querySelectorAll('.form__content input, .form__content textarea').forEach(element => {
-  element.addEventListener('keyup', e => {
-      let label = e.target.previousElementSibling;
-      if (e.target.value === "") {
-          label.classList.remove('active', 'highlight');
-      } else {
-          label.classList.add('active', 'highlight');
-      }
-  });
+import { formInteraction, tabNavigation } from './components/formManeger.js';
 
-  element.addEventListener('blur', e => {
-      let label = e.target.previousElementSibling;
-      if (e.target.value === "") {
-          label.classList.remove('active', 'highlight');
-      } else {
-          label.classList.remove('highlight');
-      }
-  });
+formInteraction();
+tabNavigation();
 
-  element.addEventListener('focus', e => {
-      let label = e.target.previousElementSibling;
-      if (e.target.value === "") {
-          label.classList.remove('highlight');
-      } else if (e.target.value !== "") {
-          label.classList.add('highlight');
-      }
-  });
-});
 
-// Tab navigation
-document.querySelectorAll('.tab a').forEach(element => {
-  element.addEventListener('click', e => {
-      e.preventDefault();
-
-      e.target.parentNode.classList.add('active');
-      Array.from(e.target.parentNode.parentNode.children).forEach(sibling => {
-          if (sibling !== e.target.parentNode) {
-              sibling.classList.remove('active');
-          }
-      });
-
-      let target = e.target.getAttribute('href');
-
-      document.querySelectorAll('.form__inner > div').forEach(element => {
-          if ('#' + element.id !== target) {
-              element.style.display = 'none';
-          } else {
-              element.style.display = 'block';
-              element.style.opacity = 0;
-              setTimeout(() => {
-                  element.style.transition = 'opacity 600ms';
-                  element.style.opacity = 1;
-              }, 20);
-          }
-      });
-  });
-});
 
 // Form validation
 const validationRules = [
@@ -326,3 +240,4 @@ document.getElementById('submitBtn').addEventListener('click', async e => {
     window.location.href = "#popup-cancellation";
   }
 });
+

@@ -9,14 +9,7 @@ let posts = [];
 let leftBtn;
 let rightBtn;
 
-// Base URL
-const apiBase = "https://carblog.maxmartinsen.pw";
-const jsonBase = "/wp-json/wp/v2";
-const postsBase = "/posts";
-const perPageAll = "?per_page=99&_embed";
-
-// Full URL
-const fullPostURL = `${apiBase}${jsonBase}${postsBase}${perPageAll}`;
+import {  fullPostURL } from './components/urlManager.js';
 
 // Function to decode HTML entities
 function htmlDecode(input){
