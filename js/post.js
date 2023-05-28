@@ -326,4 +326,3 @@ document.getElementById('submitBtn').addEventListener('click', async e => {
     window.location.href = "#popup-cancellation";
   }
 });
-
