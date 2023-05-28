@@ -118,7 +118,7 @@ function formValidation(validationRules) {
 // Form submission
 
 function formSubmission(validationRules) {
-    document.getElementById('submitBtn').addEventListener('click', e => {
+    document.getElementById('submitBtn').addEventListener('click', async e => {
         e.preventDefault();
 
         let isValid = validationRules.every(({id, labelId, test, errorMsg, successMsg}) => {
@@ -137,11 +137,46 @@ function formSubmission(validationRules) {
         });
 
         if (isValid) {
-            window.location.href = "#popup-gratitude";
+            // Get the form values
+            let name = document.getElementById('nameInput').value;
+            let email = document.getElementById('emailInput').value;
+            let subject = document.getElementById('subjectInput').value;
+            let message = document.getElementById('messageInput').value;
+
+            // Prepare the data to send
+            let data = {
+                'name': name,
+                'email': email,
+                'subject': subject,
+                'message': message,
+            };
+
+            try {
+                // Make the POST request to the WordPress API
+                const response = await fetch(`https://carblog.maxmartinsen.pw/wp-json/contact/v1/send`, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+                const jsonResponse = await response.json();
+
+                console.log('Success:', jsonResponse);
+
+                window.location.href = "#popup-gratitude";
+            } catch (error) {
+                console.error('Error:', error);
+                window.location.href = "#popup-cancellation";
+            }
         } else {
             window.location.href = "#popup-cancellation";
         }
     });
 }
+
 
 export { formInteraction, tabNavigation, formValidation, formSubmission, validationRules };
